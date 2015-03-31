@@ -1,0 +1,14 @@
+﻿<Application x:Class="Walterlv.Clipboards.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Brush x:Key="Clipboard.AudioBrush">Tomato</Brush>
+        <Brush x:Key="Clipboard.FileListBrush">MediumVioletRed</Brush>
+        <Brush x:Key="Clipboard.ImageBrush">ForestGreen</Brush>
+        <Brush x:Key="Clipboard.TextBrush">DodgerBlue</Brush>
+        <Brush x:Key="Clipboard.OtherBrush">Gray</Brush>
+        <Brush x:Key="Clipboard.Format.Native">Transparent</Brush>
+        <Brush x:Key="Clipboard.Format.AutoConvertable">Red</Brush>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Walterlv.Clipboards.ClipboardDataItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:clipboards1="clr-namespace:Walterlv.Clipboards"
+             mc:Ignorable="d"
+             d:DesignWidth="600" d:DesignHeight="100"
+             FontSize="14" FontFamily="Consolas"
+             d:DataContext="{d:DesignData ClipboardData}">
+
+    <!-- 资源 -->
+    <UserControl.Resources>
+        <clipboards1:NullToVisibilityConverter x:Key="NullToVisibility" />
+        <clipboards1:FormatToBrushConverter x:Key="FormatToBrush" />
+        <clipboards1:DataToStringConverter x:Key="DataToString" />
+    </UserControl.Resources>
+
+    <!-- 根元素 -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                x:Name="DataTypeButton"
+                Padding="5"
+                HorizontalContentAlignment="Left"
+                Background="{Binding DataType, Converter={StaticResource FormatToBrush}}"
+                Content="{Binding DataType}" />
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 Padding="4"
+                 BorderBrush="{Binding DataType, Converter={StaticResource FormatToBrush}}"
+                 BorderThickness="2,0,2,2"
+                 TextWrapping="WrapWithOverflow"
+                 Visibility="{Binding Data, Converter={StaticResource NullToVisibility}}"
+                 Text="{Binding Data, Converter={StaticResource DataToString}}"
+                 IsReadOnly="True" />
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 Padding="4"
+                 BorderBrush="{Binding DataType, Converter={StaticResource FormatToBrush}}"
+                 BorderThickness="2,0,2,2" Foreground="Red"
+                 TextWrapping="WrapWithOverflow"
+                 Visibility="{Binding Exception, Converter={StaticResource NullToVisibility}}"
+                 Text="{Binding Exception.Message, Mode=OneWay}"
+                 IsReadOnly="True" />
+    </Grid>
+</UserControl>
