@@ -9,9 +9,9 @@ using System.Windows;
 [assembly: AssemblyTitle("剪贴板查看器")]
 [assembly: AssemblyDescription("查看剪贴板中格式无关的数据。")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("lvyi @ CVTE")]
+[assembly: AssemblyCompany("walterlv")]
 [assembly: AssemblyProduct("剪贴板查看器")]
-[assembly: AssemblyCopyright("Copyright © lvyi 2014-2015")]
+[assembly: AssemblyCopyright("Copyright © walterlv 2014-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -50,6 +50,6 @@ using System.Windows;
 // 可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”: 
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.2.2")]
-[assembly: AssemblyFileVersion("1.0.2.2")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
 [assembly: NeutralResourcesLanguage("zh-Hans")]
