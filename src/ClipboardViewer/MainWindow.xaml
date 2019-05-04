@@ -30,7 +30,7 @@
                 <Button Margin="5" Padding="16"
                         FontSize="14"
                         Content="查看剪贴板内容"
-                        Click="GetClipboard" />
+                        Click="CheckClipboardButton_Click" />
                 <Separator />
                 <UniformGrid Margin="5">
                     <Button Name="ContainsAudioCheckBox"
@@ -56,7 +56,7 @@
                 </UniformGrid>
                 <Button Margin="5" Padding="5"
                         Content="刷新"
-                        Click="CheckStatus" />
+                        Click="RefreshButton_Click" />
                 <Separator />
                 <Button Margin="5" Padding="5"
                         Content="清空剪贴板"

@@ -61,7 +61,7 @@ namespace Walterlv.Clipboards
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string format = value as string;
+            var format = value as string;
             if (format != null)
             {
                 switch (format)
@@ -152,14 +152,13 @@ namespace Walterlv.Clipboards
                 return String.Empty;
             }
             StringBuilder builder = new StringBuilder();
-            if (value is IEnumerable && !(value is string))
+            if (value is IEnumerable enumerable && !(value is string))
             {
-                IEnumerable enumerable = value as IEnumerable;
                 builder.AppendLine(enumerable.ToString());
                 builder.AppendLine("{");
                 foreach (object item in enumerable)
                 {
-                    builder.AppendLine(String.Format("    {0},", item));
+                    builder.AppendLine(string.Format("    {0},", item));
                 }
                 builder.Append("}");
             }

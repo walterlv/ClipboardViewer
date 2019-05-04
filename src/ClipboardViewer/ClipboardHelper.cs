@@ -17,7 +17,7 @@ namespace Walterlv.Clipboards
         /// </summary>
         /// <param name="retryTimes">当获取失败时自动尝试的次数。</param>
         /// <returns>从剪贴板中获取的数据，如果剪贴板中无内容，则为 null。</returns>
-        public static IDataObject GetDataObject(int retryTimes = DefaultRetryTimes)
+        public static IDataObject? GetDataObject(int retryTimes = DefaultRetryTimes)
         {
             return TryDo(() => Clipboard.GetDataObject(), retryTimes);
         }
@@ -32,17 +32,17 @@ namespace Walterlv.Clipboards
             TryDo(() => Clipboard.SetDataObject(dataObject), retryTimes);
         }
 
-        public static object TryGetData(this IDataObject dataObject, Type format, int retryTimes = DefaultRetryTimes)
+        public static object? TryGetData(this IDataObject dataObject, Type format, int retryTimes = DefaultRetryTimes)
         {
             return TryDo(() => dataObject.GetData(format), retryTimes);
         }
 
-        public static object TryGetData(this IDataObject dataObject, string format, int retryTimes = DefaultRetryTimes)
+        public static object? TryGetData(this IDataObject dataObject, string format, int retryTimes = DefaultRetryTimes)
         {
             return TryDo(() => dataObject.GetData(format), retryTimes);
         }
 
-        public static object TryGetData(this IDataObject dataObject, string format, bool autoConvert,
+        public static object? TryGetData(this IDataObject dataObject, string format, bool autoConvert,
             int retryTimes = DefaultRetryTimes)
         {
             return TryDo(() => dataObject.GetData(format, autoConvert), retryTimes);
@@ -100,7 +100,8 @@ namespace Walterlv.Clipboards
         /// <param name="func">进行的剪贴板操作。</param>
         /// <param name="retryTimes">当操作失败时重试的次数。</param>
         /// <returns>剪贴板操作的返回值。</returns>
-        private static T TryDo<T>(Func<T> func, int retryTimes = DefaultRetryTimes)
+        private static T? TryDo<T>(Func<T> func, int retryTimes = DefaultRetryTimes)
+            where T : class
         {
             int loopTimes = retryTimes < 0 ? 1 : retryTimes + 1;
             for (int i = 0; i < loopTimes; i++)
@@ -114,7 +115,7 @@ namespace Walterlv.Clipboards
                     Thread.Sleep(10);
                 }
             }
-            return default(T);
+            return default;
         }
     }
 }

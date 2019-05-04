@@ -38,7 +38,7 @@ namespace Walterlv.Clipboards
         /// <summary>
         /// 获取或设置当前正在查看的剪贴板数据。
         /// </summary>
-        private IDataObject _dataObject;
+        private IDataObject? _dataObject;
 
         /// <summary>
         /// 创建剪贴板查看器主窗口。此方法由 <see cref="App"/> 自动调用。
@@ -56,7 +56,17 @@ namespace Walterlv.Clipboards
         /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs args)
         {
-            GetClipboard(null, null);
+            GetClipboard();
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateObjectTypesUI();
+        }
+
+        private void CheckClipboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            GetClipboard();
         }
 
         private void FormatButton_Click(object sender, RoutedEventArgs e)
@@ -90,17 +100,17 @@ namespace Walterlv.Clipboards
         /// <summary>
         /// 获取剪贴板内容并显示。
         /// </summary>
-        private void GetClipboard(Object sender, RoutedEventArgs args)
+        private void GetClipboard()
         {
             _dataObject = Clipboard.GetDataObject();
-            CheckStatus(null, null);
+            UpdateObjectTypesUI();
             CheckCurrentDataObject();
         }
 
         /// <summary>
         /// 检查剪贴板内容，并将包含的数据格式呈现在界面上。
         /// </summary>
-        private void CheckStatus(Object sender, RoutedEventArgs args)
+        private void UpdateObjectTypesUI()
         {
             ContainsAudioCheckBox.IsEnabled = Clipboard.ContainsAudio();
             ContainsFileDropListCheckBox.IsEnabled = Clipboard.ContainsFileDropList();
@@ -114,8 +124,8 @@ namespace Walterlv.Clipboards
         private void ClearClipboard(Object sender, RoutedEventArgs args)
         {
             Clipboard.Clear();
-            CheckStatus(null, null);
-            GetClipboard(null, null);
+            UpdateObjectTypesUI();
+            GetClipboard();
         }
 
         /// <summary>
@@ -194,9 +204,8 @@ namespace Walterlv.Clipboards
                             _clipboardInfoBuilder.Append("null");
                             continue;
                         }
-                        if (data is IEnumerable && !(data is string))
+                        if (data is IEnumerable enumerable && !(data is string))
                         {
-                            IEnumerable enumerable = data as IEnumerable;
                             _clipboardInfoBuilder.AppendLine(enumerable.ToString());
                             _clipboardInfoBuilder.AppendLine("{");
                             foreach (object item in enumerable)
