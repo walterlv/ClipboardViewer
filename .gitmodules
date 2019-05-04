@@ -1,0 +1,3 @@
+[submodule "src/Walterlv.FluentDesign"]
+	path = src/Walterlv.FluentDesign
+	url = https://github.com/walterlv/Walterlv.FluentDesign.git
