@@ -16,7 +16,24 @@
     <RepositoryType>git</RepositoryType>
     <ApplicationIcon />
   </PropertyGroup>
+
   <ItemGroup>
     <Resource Include="**\*.ico" />
   </ItemGroup>
+  
+  <PropertyGroup>
+    <FluentDesignProject>..\Walterlv.FluentDesign\Walterlv.FluentDesign\</FluentDesignProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(FluentDesignProject)**\*.cs" Exclude="$(FluentDesignProject)bin\**;$(FluentDesignProject)obj\**" Link="Themes\%(FileName).cs" DependentUpon="%(Filename)" />
+    <Page Include="$(FluentDesignProject)**\*.xaml" Exclude="$(FluentDesignProject)bin\**;$(FluentDesignProject)obj\**" Link="Themes\%(FileName).xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="..\Walterlv.FluentDesign\Walterlv.FluentDesign\Themes\Window.Universal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  
 </Project>
