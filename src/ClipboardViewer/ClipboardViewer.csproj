@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <Description>查看剪贴板中格式无关的数据。</Description>
@@ -16,4 +16,7 @@
     <RepositoryType>git</RepositoryType>
     <ApplicationIcon />
   </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="**\*.ico" />
+  </ItemGroup>
 </Project>
