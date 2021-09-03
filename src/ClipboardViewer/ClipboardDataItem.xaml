@@ -7,13 +7,22 @@
              mc:Ignorable="d"
              d:DesignWidth="600" d:DesignHeight="100"
              FontSize="14" FontFamily="Consolas"
-             d:DataContext="{d:DesignData ClipboardData}">
+             d:DataContext="{d:DesignInstance clipboards1:ClipboardData}">
 
     <!-- 资源 -->
     <UserControl.Resources>
         <clipboards1:NullToVisibilityConverter x:Key="NullToVisibility" />
         <clipboards1:FormatToBrushConverter x:Key="FormatToBrush" />
         <clipboards1:DataToStringConverter x:Key="DataToString" />
+        <DrawingImage x:Key="ExportToFileImage">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="White">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry FillRule="Nonzero" Figures="M42.66667175292969,640L127.99999237060547,640 127.99999237060547,874.6666870117188 896,874.6666870117188 896,640 981.3333129882812,640 981.3333129882812,960 42.66667175292969,960 42.66667175292969,640z M512.4266967773438,3.6693289279937744L799.0399780273438,290.28265380859375 738.68798828125,350.61334228515625 554.6666870117188,166.57066345214844 554.6666870117188,746.6666870117188 469.3333435058594,746.6666870117188 469.3333435058594,167.46665954589844 286.16534423828125,350.61334228515625 225.8346710205078,290.28265380859375 512.4266967773438,3.6693289279937744z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </UserControl.Resources>
 
     <!-- 根元素 -->
@@ -26,12 +35,18 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button 
                 x:Name="DataTypeButton"
                 Padding="5"
                 HorizontalContentAlignment="Left"
                 Background="{Binding DataType, Converter={StaticResource FormatToBrush}}"
                 Content="{Binding DataType}" />
+            <Button x:Name="ExportToFileButton" HorizontalAlignment="Right" Width="25" Background="Transparent">
+                <Image Width="14" Height="14" Source="{StaticResource ExportToFileImage}" Stretch="Fill"></Image>
+            </Button>
+        </Grid>
+       
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                  Padding="4"
                  BorderBrush="{Binding DataType, Converter={StaticResource FormatToBrush}}"
