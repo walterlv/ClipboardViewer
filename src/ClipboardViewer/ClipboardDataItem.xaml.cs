@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace Walterlv.Clipboards
 {
@@ -20,6 +22,40 @@ namespace Walterlv.Clipboards
         public ClipboardDataItem()
         {
             InitializeComponent();
+        }
+
+        private void ExportToFileButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.ShowDialog();
+            var fileName = saveFileDialog.FileName;
+            if (string.IsNullOrEmpty(fileName)) return;
+
+            try
+            {
+                var file = new FileInfo(fileName);
+                if (file.Directory is null)
+                {
+                    return;
+                }
+
+                file.Directory.Create();
+
+                var clipboardData = (ClipboardData) DataContext;
+                if (clipboardData.Data is MemoryStream memory)
+                {
+                    using var fileStream = file.OpenWrite();
+                    memory.CopyTo(fileStream);
+                }
+                else if (clipboardData.Data is { } data)
+                {
+                    File.WriteAllText(file.FullName, data.ToString());
+                }
+            }
+            catch (Exception)
+            {
+                // 写文件写错啥的，忽略就好了
+            }
         }
     }
 
